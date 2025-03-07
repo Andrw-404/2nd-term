@@ -19,7 +19,7 @@ public class Trie
     /// a method for adding elements to a trie.
     /// </summary>
     /// <param name="element">the string to add.</param>
-    /// <returns>True, if the string was successfully added; False, if if the string was already in the trie.</returns>
+    /// <returns>True, if the string was successfully added; False, if the string was already in the trie.</returns>
     /// <exception cref="ArgumentNullException">triggered if <paramref name="element"/> is null. </exception>
     public bool Add(string element)
     {
