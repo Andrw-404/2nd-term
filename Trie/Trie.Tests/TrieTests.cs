@@ -1,4 +1,4 @@
-﻿namespace TrieTests
+﻿namespace Trie.Tests
 {
     public class Tests
     {
