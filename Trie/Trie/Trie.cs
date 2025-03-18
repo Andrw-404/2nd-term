@@ -162,7 +162,7 @@ public class Trie
         public bool IsEnd { get; set; }
 
         /// <summary>
-        /// Gets or sets the nnumber of words that use this node as a prefix.
+        /// Gets or sets the number of words that use this node as a prefix.
         /// </summary>
         public int PrefixCount { get; set; }
     }
