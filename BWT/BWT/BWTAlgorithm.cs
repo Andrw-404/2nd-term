@@ -1,7 +1,6 @@
-﻿using System.Text;
-
-namespace BWT
+﻿namespace BWT
 {
+    using System.Text;
     public class BWTAlgorithm
     {
         public static (string, int) FrontBWT(string input)
