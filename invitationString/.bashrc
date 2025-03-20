@@ -117,8 +117,6 @@ if ! shopt -oq posix; then
   fi
 fi
 
-
-
 function PromptInfo() {
     if git rev-parse --is-inside-work-tree &>/dev/null; then
         local changedFiles=$(git status --porcelain | wc -l | awk '{print $1}')
