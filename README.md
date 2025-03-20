@@ -1,13 +1,13 @@
 # 2nd-term
 
-## Список заданий
+## РЎРїРёСЃРѕРє Р·Р°РґР°РЅРёР№
 
-### [Задание 1: Преобразование Барроуза — Уилера](https://github.com/Andrw-404/2nd-term/tree/BWT/BWT/BWT)
+### [Р—Р°РґР°РЅРёРµ 1: РџСЂРµРѕР±СЂР°Р·РѕРІР°РЅРёРµ Р‘Р°СЂСЂРѕСѓР·Р° вЂ” РЈРёР»РµСЂР°](https://github.com/Andrw-404/2nd-term/tree/BWT/BWT/BWT)
 
-### [Задание 2: Бор](https://github.com/Andrw-404/2nd-term/tree/trie/Trie)
+### [Р—Р°РґР°РЅРёРµ 2: Р‘РѕСЂ](https://github.com/Andrw-404/2nd-term/tree/trie/Trie)
 
-### [Задание 4: Строка приглашения](https://github.com/Andrw-404/2nd-term/tree/invitationString/invitationString)
+### [Р—Р°РґР°РЅРёРµ 4: РЎС‚СЂРѕРєР° РїСЂРёРіР»Р°С€РµРЅРёСЏ](https://github.com/Andrw-404/2nd-term/tree/invitationString/invitationString)
 
 
 [![CI](https://github.com/Andrw-404/2nd-term/actions/workflows/ci.yml/badge.svg)](https://github.com/Andrw-404/2nd-term/actions/workflows/ci.yml)
-[![Лицензия](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
+[![Р›РёС†РµРЅР·РёСЏ](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE)
