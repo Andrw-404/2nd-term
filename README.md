@@ -6,6 +6,6 @@
 
 [Задание 2: Бор](https://github.com/Andrw-404/2nd-term/tree/trie/Trie)
 
-[Задание 3: Алгоритм Лемпеля — Зива — Велча (soon)]
+
 
 [Задание 4: Строка приглашения](https://github.com/Andrw-404/2nd-term/tree/invitationString/invitationString)
