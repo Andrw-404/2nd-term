@@ -1,0 +1,31 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.13.35806.99
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LZWAlgorithm", "LZWAlgorithm\LZWAlgorithm.csproj", "{5F7CCF5D-EDA2-4DD4-9B9C-03DF0104F20D}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "LZWAlgorithm.Tests", "LZWAlgorithm.Tests\LZWAlgorithm.Tests.csproj", "{6EC75D69-5EB0-430D-B9C2-04E256D4ED86}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{5F7CCF5D-EDA2-4DD4-9B9C-03DF0104F20D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5F7CCF5D-EDA2-4DD4-9B9C-03DF0104F20D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5F7CCF5D-EDA2-4DD4-9B9C-03DF0104F20D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5F7CCF5D-EDA2-4DD4-9B9C-03DF0104F20D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6EC75D69-5EB0-430D-B9C2-04E256D4ED86}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6EC75D69-5EB0-430D-B9C2-04E256D4ED86}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6EC75D69-5EB0-430D-B9C2-04E256D4ED86}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6EC75D69-5EB0-430D-B9C2-04E256D4ED86}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {3DA7D8B0-B461-4EF7-8F13-4180C1C17624}
+	EndGlobalSection
+EndGlobal
