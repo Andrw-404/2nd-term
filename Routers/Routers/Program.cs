@@ -4,23 +4,24 @@
 
 using Routers;
 
-if (args.Length != 2)
-{
-    Console.Error.WriteLine("Использование Routers <input_file> <output_file>");
-    return 1;
-}
+Console.WriteLine("\nВведите имя(с расширением) исходного файла");
+var inputPath = Console.ReadLine();
+
+Console.WriteLine("\nВведите имя(с расширением) выходного файла");
+var outputPath = Console.ReadLine();
 
 try
 {
-    var newGraph = ReadFile.ReadFromFile(args[0]);
+    var newGraph = ReadFile.ReadFromFile(inputPath);
     var mst = PrimAlgorithm.FindMaximumSpanningTree(newGraph);
     var result = Output.TransformationMst(mst);
-    File.WriteAllText(args[1], result);
+    File.WriteAllText(outputPath, result);
+    Console.WriteLine("\nУспешно\n");
     return 0;
 }
-catch (InvalidOperationException ex)
+catch (InvalidOperationException ex) when (ex.Message.Contains("несвязный"))
 {
-    Console.Error.WriteLine("Сеть не связна");
+    Console.Error.WriteLine("\nСеть не связна\n");
     return 1;
 }
 catch (Exception ex)
