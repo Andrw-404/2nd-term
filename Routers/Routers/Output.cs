@@ -4,8 +4,16 @@
 
 namespace Routers
 {
-    class Output
+    /// <summary>
+    /// MST formatting for convenient output.
+    /// </summary>
+    public class Output
     {
+        /// <summary>
+        /// Converts the list of MST edges to a string format.
+        /// </summary>
+        /// <param name="mst">List of mst edges.</param>
+        /// <returns>returns a string like: [router] : [paired router] (bandwidth), ... .</returns>
         public static string TransformationMst(List<Edge> mst)
         {
             var uniqueEdges = new HashSet<(int, int)>();

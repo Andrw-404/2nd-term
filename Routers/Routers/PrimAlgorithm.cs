@@ -4,8 +4,19 @@
 
 namespace Routers
 {
-    class PrimAlgorithm
+    /// <summary>
+    /// Implementation of the Prim algorithm for constructing a maximal spanning tree.
+    /// </summary>
+    public class PrimAlgorithm
     {
+        /// <summary>
+        /// Finds the maximum spanning tree (MST) for a given graph.
+        /// </summary>
+        /// <param name="graph">The source graph read from the file.</param>
+        /// <returns>List of mst edges.</returns>
+        /// <exception cref="InvalidOperationException">
+        /// It is thrown if the graph is disconnected.
+        /// </exception>
         public static List<Edge> FindMaximumSpanningTree(Graph graph)
         {
             var mst = new List<Edge>();
@@ -34,7 +45,6 @@ namespace Routers
                 if (visited.Contains(next))
                 {
                     continue;
-
                 }
 
                 mst.Add(edge);

@@ -6,9 +6,17 @@ using Routers;
 
 Console.WriteLine("\nВведите имя(с расширением) исходного файла");
 var inputPath = Console.ReadLine();
+if (inputPath == null)
+{
+    throw new ArgumentNullException();
+}
 
 Console.WriteLine("\nВведите имя(с расширением) выходного файла");
 var outputPath = Console.ReadLine();
+if (outputPath == null)
+{
+    throw new ArgumentNullException();
+}
 
 try
 {

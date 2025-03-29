@@ -4,8 +4,16 @@
 
 namespace Routers
 {
+    /// <summary>
+    /// Implementing reading from a file.
+    /// </summary>
     public class ReadFile
     {
+        /// <summary>
+        /// Implementing reading from a file.
+        /// </summary>
+        /// <param name="path">The path to the file.</param>
+        /// <returns>The constructed graph.</returns>
         public static Graph ReadFromFile(string path)
         {
             var graph = new Graph();
@@ -42,7 +50,7 @@ namespace Routers
                         continue;
                     }
 
-                    graph.addEdges(new Edge(start, end, weight));
+                    graph.AddEdges(new Edge(start, end, weight));
                 }
             }
 
