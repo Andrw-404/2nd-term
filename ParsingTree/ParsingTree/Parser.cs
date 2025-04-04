@@ -39,16 +39,6 @@ namespace ParsingTree
                 {
                     position++;
                 }
-                else if (input[position] == '(' || input[position] == ')')
-                {
-                    symbols.Add(input[position].ToString());
-                    position++;
-                }
-                else if (this.IsOperator(input[position]))
-                {
-                    symbols.Add(input[position].ToString());
-                    position++;
-                }
                 else if (char.IsDigit(input[position]) || (input[position] == '-' && (position + 1 < input.Length && char.IsDigit(input[position + 1]))))
                 {
                     int start = position++;
@@ -58,6 +48,16 @@ namespace ParsingTree
                     }
 
                     symbols.Add(input.Substring(start, position - start));
+                }
+                else if (input[position] == '(' || input[position] == ')')
+                {
+                    symbols.Add(input[position].ToString());
+                    position++;
+                }
+                else if (this.IsOperator(input[position]))
+                {
+                    symbols.Add(input[position].ToString());
+                    position++;
                 }
                 else
                 {
