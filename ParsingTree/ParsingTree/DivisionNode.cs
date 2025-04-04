@@ -4,7 +4,7 @@
 
 namespace ParsingTree
 {
-    class DivisionNode : Node
+    public class DivisionNode : Node
     {
         private Node left;
         private Node right;
