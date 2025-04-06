@@ -4,10 +4,21 @@
 
 namespace ParsingTree
 {
+    /// <summary>
+    /// A class for parsing arithmetic expressions and building a parse tree.
+    /// </summary>
     public class Parser
     {
         private int currentToken;
         private List<string>? tokens;
+
+        /// <summary>
+        /// Parses the input expression and builds a parse tree.
+        /// </summary>
+        /// <param name="input">Input expression.</param>
+        /// <returns>Returns the root of the resulting tree.</returns>
+        /// <exception cref="InvalidDataException">It is thrown if the string with the expression was empty or if there were problems with splitting.
+        /// </exception>
         public Node Parse(string input)
         {
             List<string> symbols = this.Splitting(input);
