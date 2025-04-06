@@ -15,6 +15,11 @@ else
     fileName = args[0];
 }
 
+if (string.IsNullOrWhiteSpace(fileName))
+{
+    Console.WriteLine("Не указано имя файла");
+    return;
+}
 try
 {
     string input = File.ReadAllText(fileName);
