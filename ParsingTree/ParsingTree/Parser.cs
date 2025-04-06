@@ -29,7 +29,7 @@ namespace ParsingTree
             return root;
         }
 
-        public List<string> Splitting(string input)
+        private List<string> Splitting(string input)
         {
             List<string> symbols = new List<string>();
             int position = 0;
@@ -112,7 +112,7 @@ namespace ParsingTree
 
             if (this.currentToken >= this.tokens.Count || this.tokens[this.currentToken] != ")")
             {
-                throw new InvalidDataException("expected ')");
+                throw new InvalidDataException("expected ')'");
             }
 
             this.currentToken++;
