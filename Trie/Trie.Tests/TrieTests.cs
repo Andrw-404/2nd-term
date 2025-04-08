@@ -4,7 +4,7 @@
     {
         private static readonly string[] TestWords = ["banana", "bank", "bar", "dog", "cat", "car"];
 
-        private static Trie InitializationTrie()
+        private static Trie InitializeTrie()
         {
             var trie = new Trie();
             foreach (var word in TestWords)
@@ -29,7 +29,7 @@
         [Test]
         public void Contains_ShouldReturnTrueForAddedWords()
         {
-            Trie trie = InitializationTrie();
+            Trie trie = InitializeTrie();
             foreach (var word in TestWords)
             {
                 Assert.That(trie.Contains(word), Is.True);
@@ -39,7 +39,8 @@
         [Test]
         public void Contains_ShouldReturnFalseForNonIncomingWords()
         {
-            Trie trie = new Trie();
+            Trie trie = InitializeTrie();
+
             Assert.Multiple(() =>
             {
                 Assert.That(trie.Contains("carting"), Is.False);
@@ -51,7 +52,7 @@
         [Test]
         public void HowManyStartsWithPrefix_ShouldReturnCorrectCount()
         {
-            Trie trie = InitializationTrie();
+            Trie trie = InitializeTrie();
             Assert.Multiple(() =>
             {
                 Assert.That(trie.HowManyStartsWithPrefix("ban"), Is.EqualTo(2));
@@ -67,7 +68,7 @@
         [Test]
         public void Remove_ShouldDeleteWordsAndReturnTrue()
         {
-            Trie trie = InitializationTrie();
+            Trie trie = InitializeTrie();
             Assert.That(trie.Size, Is.EqualTo(6));
             Assert.Multiple(() =>
             {
@@ -85,7 +86,7 @@
         [Test]
         public void Remove_ShouldReturnFalseFoNonIncomingWords()
         {
-            Trie trie = InitializationTrie();
+            Trie trie = InitializeTrie();
             Assert.Multiple(() =>
             {
                 Assert.That(trie.Remove("ndsa"), Is.False);
