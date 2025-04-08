@@ -16,3 +16,5 @@
 ### [Задание 5: Роутеры](https://github.com/Andrw-404/2nd-term/tree/routers/Routers)
 
 ### [Задание 6: Дерево разбора](https://github.com/Andrw-404/2nd-term/tree/parsingTree/ParsingTree)
+
+### [Задание 7: Map, Filter и Fold](https://github.com/Andrw-404/2nd-term/tree/MapFilterFold/FunctionalUtils)
