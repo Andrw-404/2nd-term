@@ -61,11 +61,5 @@ namespace ParsingTree.Tests
             var root = this.parser.Parse("-3");
             Assert.That(root.ValueOrExpression, Is.EqualTo(-3));
         }
-
-        [Test]
-        public void TemporaryTest()
-        {
-            Assert.Fail("1123");
-        }
     }
 }
