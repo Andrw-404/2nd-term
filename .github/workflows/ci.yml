@@ -24,19 +24,12 @@ jobs:
       with:
         dotnet-version: '9.x'
 
-    - name: Build
-      shell: cmd
+    - name: Build and Test
+      shell: pwsh
       run: |
-        For /R %%I in (*.sln) do (
-          dotnet build %%I
-          if %errorlevel% neq 0 exit /b %errorlevel%
-        )
-
-    - name: Run tests
-      shell: cmd
-      run: |
-        For /R %%I in (*.sln) do (
-          dotnet test %%I --no-build
-          if %errorlevel% neq 0 exit /b %errorlevel%
-        )
-
+        Get-ChildItem -Recurse -Filter *.sln | ForEach-Object {
+          dotnet build $_.FullName
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+          dotnet test $_.FullName --no-build
+          if ($LASTEXITCODE -ne 0) { exit $LASTEXITCODE }
+        }
