@@ -86,6 +86,11 @@ namespace ParsingTree
 
         private Node ParseOperand()
         {
+            if (this.tokens == null)
+            {
+                throw new ArgumentNullException("tokens is null");
+            }
+
             if (this.currentToken >= this.tokens.Count)
             {
                 throw new InvalidDataException();
@@ -111,6 +116,11 @@ namespace ParsingTree
 
         private Node ParseExpression()
         {
+            if (this.tokens == null)
+            {
+                throw new ArgumentNullException("tokens is null");
+            }
+
             if (this.currentToken >= this.tokens.Count)
             {
                 throw new InvalidDataException();
