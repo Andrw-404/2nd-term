@@ -23,12 +23,12 @@ jobs:
     - uses: actions/setup-dotnet@v4
       with:
         dotnet-version: '9.x'
-
+        
     - name: Build
       shell: cmd
       run: |
         For /R %%I in (*.sln) do (
-          dotnet build %%I
+          dotnet build %%I --configuration Release
           if %errorlevel% neq 0 exit /b %errorlevel%
         )
 
@@ -36,7 +36,6 @@ jobs:
       shell: cmd
       run: |
         For /R %%I in (*.sln) do (
-          dotnet test %%I --no-build
+          dotnet test %%I --no-build --configuration Release --logger "console;verbosity=detailed"
           if %errorlevel% neq 0 exit /b %errorlevel%
         )
-
