@@ -65,7 +65,7 @@ namespace ParsingTree.Tests
         [Test]
         public void TemporaryTest()
         {
-            Assert.Fail("321");
+            Assert.Fail("111");
         }
     }
 }
