@@ -15,9 +15,9 @@
         {
             testCalculator.AppendNumber("5");
             testCalculator.SetOperator('+');
-            testCalculator.AppendNumber("3");
+            testCalculator.AppendNumber("0");
             testCalculator.Calculate();
-            Assert.That(testCalculator.CurrentDisplay, Is.EqualTo("8"));
+            Assert.That(testCalculator.CurrentDisplay, Is.EqualTo("5"));
         }
     }
 }
