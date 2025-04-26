@@ -20,6 +20,11 @@ public class Calculator
 
     public void AppendNumber(string number)
     {
+        if (this.CurrentDisplay == "0" && number == "0")
+        {
+            return;
+        }
+
         if (this.isError)
         {
             this.Clear();
