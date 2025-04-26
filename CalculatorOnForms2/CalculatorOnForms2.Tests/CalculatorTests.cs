@@ -27,6 +27,7 @@
             testCalculator.AppendNumber("5");
             testCalculator.AppendNumber("7");
             Assert.That(testCalculator.CurrentDisplay, Is.EqualTo("157"));
+            Assert.Fail();
         }
 
 
