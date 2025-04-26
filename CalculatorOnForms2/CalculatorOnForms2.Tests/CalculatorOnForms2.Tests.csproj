@@ -17,7 +17,7 @@
 	</ItemGroup>
 
 	<ItemGroup>
-		<ProjectReference Include="..\CalculatorOnForms2\CalculatorOnForms2.csproj" />
+	  <ProjectReference Include="..\CalculatorOnForms2\CalculatorOnForms2.csproj" />
 	</ItemGroup>
 
 	<ItemGroup>

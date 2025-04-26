@@ -197,6 +197,7 @@
             // 
             // buttonMultiplication
             // 
+            buttonMultiplication.Cursor = Cursors.IBeam;
             buttonMultiplication.Location = new Point(644, 269);
             buttonMultiplication.Name = "buttonMultiplication";
             buttonMultiplication.Size = new Size(94, 29);
@@ -219,6 +220,7 @@
             // 
             AutoScaleDimensions = new SizeF(8F, 20F);
             AutoScaleMode = AutoScaleMode.Font;
+            BackColor = SystemColors.ActiveCaption;
             ClientSize = new Size(800, 450);
             Controls.Add(button0);
             Controls.Add(buttonMultiplication);
