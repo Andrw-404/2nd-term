@@ -18,3 +18,5 @@
 ### [Задание 6: Дерево разбора](https://github.com/Andrw-404/2nd-term/tree/parsingTree/ParsingTree)
 
 ### [Задание 7: Map, Filter и Fold](https://github.com/Andrw-404/2nd-term/tree/MapFilterFold/FunctionalUtils)
+
+### [Задание 8: Калькулятор](https://github.com/Andrw-404/2nd-term/tree/calculator/CalculatorOnForms2)
