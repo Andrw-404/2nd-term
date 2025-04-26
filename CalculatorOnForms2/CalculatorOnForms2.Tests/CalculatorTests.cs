@@ -19,5 +19,16 @@
             testCalculator.Calculate();
             Assert.That(testCalculator.CurrentDisplay, Is.EqualTo("5"));
         }
+
+        [Test]
+        public void AppendNumber_MultiDigitNumber_ShouldshouldShowTheCorrectNumber()
+        {
+            testCalculator.AppendNumber("1");
+            testCalculator.AppendNumber("5");
+            testCalculator.AppendNumber("7");
+            Assert.That(testCalculator.CurrentDisplay, Is.EqualTo("157"));
+        }
+
+
     }
 }

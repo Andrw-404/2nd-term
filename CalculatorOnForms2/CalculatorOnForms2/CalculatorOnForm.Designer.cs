@@ -213,6 +213,7 @@
             button0.TabIndex = 16;
             button0.Text = "0";
             button0.UseVisualStyleBackColor = true;
+            button0.Click += ButtonNumber_Click;
             // 
             // CalculatorOnForm
             // 
