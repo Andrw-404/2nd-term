@@ -4,10 +4,16 @@
 
 namespace CalculatorOnForms2
 {
+    /// <summary>
+    /// The basic form of the calculator that implements the user interface.
+    /// </summary>
     public partial class CalculatorOnForm : Form
     {
         private Calculator calculator = new Calculator();
 
+        /// <summary>
+        /// Initializes a new instance of the <see cref="CalculatorOnForm"/> class.
+        /// </summary>
         public CalculatorOnForm()
         {
             this.InitializeComponent();
@@ -52,10 +58,6 @@ namespace CalculatorOnForms2
         {
             this.calculator.Clear();
             this.UpdateDisplay();
-        }
-
-        private void TextDisplay_TextChanged(object sender, EventArgs e)
-        {
         }
     }
 }
