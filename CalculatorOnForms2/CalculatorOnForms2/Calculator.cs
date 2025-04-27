@@ -94,6 +94,7 @@ public class Calculator
                     if (this.currentValue == 0)
                     {
                         this.isError = true;
+                        this.CurrentDisplay = "Деление на ноль невозможно";
                         throw new DivideByZeroException();
                     }
 
