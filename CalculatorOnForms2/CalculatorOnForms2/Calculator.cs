@@ -4,6 +4,9 @@
 
 using System;
 
+/// <summary>
+/// A class that implements calculator logic.
+/// </summary>
 public class Calculator
 {
     private double currentValue = 0;
@@ -17,7 +20,10 @@ public class Calculator
     /// </summary>
     public string CurrentDisplay { get; private set; } = "0";
 
-
+    /// <summary>
+    /// Adds a digit.
+    /// </summary>
+    /// <param name="number">The number to add.</param>
     public void AppendNumber(string number)
     {
         if (this.CurrentDisplay == "0" && number == "0")
@@ -44,6 +50,10 @@ public class Calculator
         this.isError = false;
     }
 
+    /// <summary>
+    /// Sets the operator.
+    /// </summary>
+    /// <param name="op">Operator symbol.</param>
     public void SetOperator(char op)
     {
         if (this.isError)
@@ -61,6 +71,10 @@ public class Calculator
         this.isNewNumber = true;
     }
 
+    /// <summary>
+    /// Performs an arithmetic operation.
+    /// </summary>
+    /// <exception cref="DivideByZeroException">It is thrown away when dividing by zero.</exception>
     public void Calculate()
     {
         try
@@ -80,7 +94,6 @@ public class Calculator
                     if (this.currentValue == 0)
                     {
                         this.isError = true;
-                        this.CurrentDisplay = "Деление на ноль невозможно";
                         throw new DivideByZeroException();
                     }
 
@@ -97,6 +110,9 @@ public class Calculator
         }
     }
 
+    /// <summary>
+    /// Resets the calculator status.
+    /// </summary>
     public void Clear()
     {
         this.currentValue = 0;

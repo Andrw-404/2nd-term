@@ -147,9 +147,10 @@
             // 
             // buttonClear
             // 
+            buttonClear.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             buttonClear.Location = new Point(491, 344);
             buttonClear.Name = "buttonClear";
-            buttonClear.Size = new Size(94, 29);
+            buttonClear.Size = new Size(94, 41);
             buttonClear.TabIndex = 10;
             buttonClear.Text = "C";
             buttonClear.UseVisualStyleBackColor = true;
@@ -157,9 +158,10 @@
             // 
             // buttonPlus
             // 
-            buttonPlus.Location = new Point(644, 159);
+            buttonPlus.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            buttonPlus.Location = new Point(644, 143);
             buttonPlus.Name = "buttonPlus";
-            buttonPlus.Size = new Size(94, 29);
+            buttonPlus.Size = new Size(94, 45);
             buttonPlus.TabIndex = 11;
             buttonPlus.Text = "+";
             buttonPlus.UseVisualStyleBackColor = true;
@@ -167,9 +169,10 @@
             // 
             // buttonEquals
             // 
+            buttonEquals.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
             buttonEquals.Location = new Point(379, 344);
             buttonEquals.Name = "buttonEquals";
-            buttonEquals.Size = new Size(94, 29);
+            buttonEquals.Size = new Size(94, 41);
             buttonEquals.TabIndex = 12;
             buttonEquals.Text = "=";
             buttonEquals.UseVisualStyleBackColor = true;
@@ -177,9 +180,10 @@
             // 
             // buttonMinus
             // 
-            buttonMinus.Location = new Point(644, 219);
+            buttonMinus.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            buttonMinus.Location = new Point(644, 210);
             buttonMinus.Name = "buttonMinus";
-            buttonMinus.Size = new Size(94, 29);
+            buttonMinus.Size = new Size(94, 44);
             buttonMinus.TabIndex = 13;
             buttonMinus.Text = "-";
             buttonMinus.UseVisualStyleBackColor = true;
@@ -187,9 +191,10 @@
             // 
             // buttonDivision
             // 
-            buttonDivision.Location = new Point(644, 317);
+            buttonDivision.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            buttonDivision.Location = new Point(644, 269);
             buttonDivision.Name = "buttonDivision";
-            buttonDivision.Size = new Size(94, 29);
+            buttonDivision.Size = new Size(94, 44);
             buttonDivision.TabIndex = 14;
             buttonDivision.Text = "/";
             buttonDivision.UseVisualStyleBackColor = true;
@@ -197,10 +202,10 @@
             // 
             // buttonMultiplication
             // 
-            buttonMultiplication.Cursor = Cursors.IBeam;
-            buttonMultiplication.Location = new Point(644, 269);
+            buttonMultiplication.Font = new Font("Segoe UI", 10F, FontStyle.Bold);
+            buttonMultiplication.Location = new Point(644, 329);
             buttonMultiplication.Name = "buttonMultiplication";
-            buttonMultiplication.Size = new Size(94, 29);
+            buttonMultiplication.Size = new Size(94, 44);
             buttonMultiplication.TabIndex = 15;
             buttonMultiplication.Text = "*";
             buttonMultiplication.UseVisualStyleBackColor = true;
