@@ -6,6 +6,10 @@ namespace SkipList
 {
     using System.Collections;
 
+    /// <summary>
+    /// An implementation of a skip list that supports the IList<T> interface.
+    /// </summary>
+    /// <typeparam name="T">The type of elements in the collection.</typeparam>
     public class SkipList<T> : IList<T>
     {
         private const int MaxLevel = 32;
@@ -49,10 +53,24 @@ namespace SkipList
             }
         }
 
+        /// <summary>
+        /// Gets number of items in the list.
+        /// </summary>
         public int Count => this.count;
 
+        /// <summary>
+        /// Gets a value indicating whether the list is read-only.
+        /// </summary>
         public bool IsReadOnly => false;
 
+        /// <summary>
+        /// Gets or sets the element by the specified index.
+        /// </summary>
+        /// <param name="index">The element's index.</param>
+        /// <returns>The element by index.</returns>
+        /// <exception cref="ArgumentOutOfRangeException">If the index is out of range.</exception>
+        /// <exception cref="InvalidDataException"></exception>
+        /// <exception cref="NotImplementedException"></exception>
         public T this[int index]
         {
             get
