@@ -7,7 +7,7 @@ namespace SkipList
     using System.Collections;
 
     /// <summary>
-    /// An implementation of a skip list that supports the IList<T> interface.
+    /// An implementation of a skip list that supports the IListT interface.
     /// </summary>
     /// <typeparam name="T">The type of elements in the collection.</typeparam>
     public class SkipList<T> : IList<T>
@@ -68,9 +68,9 @@ namespace SkipList
         /// </summary>
         /// <param name="index">The element's index.</param>
         /// <returns>The element by index.</returns>
-        /// <exception cref="ArgumentOutOfRangeException">If the index is out of range.</exception>
-        /// <exception cref="InvalidDataException"></exception>
-        /// <exception cref="NotImplementedException"></exception>
+        /// <exception cref="ArgumentOutOfRangeException">It is thrown if the index is out of range.</exception>
+        /// <exception cref="InvalidDataException">It is thrown when the list structure is violated.</exception>
+        /// <exception cref="NotImplementedException">It is thrown when trying to set a value.</exception>
         public T this[int index]
         {
             get
@@ -108,8 +108,15 @@ namespace SkipList
             set => throw new NotImplementedException();
         }
 
+        /// <summary>
+        /// Adds an item to the end of the list.
+        /// </summary>
+        /// <param name="item">The element to add.</param>
         public void Add(T item) => this.Insert(this.count, item);
 
+        /// <summary>
+        /// Removes all items from the list.
+        /// </summary>
         public void Clear()
         {
             for (int i = 0; i < this.currentLevels; ++i)
@@ -123,8 +130,21 @@ namespace SkipList
             this.version++;
         }
 
+        /// <summary>
+        /// Determines whether the list contains the specified element.
+        /// </summary>
+        /// <param name="item">The search element.</param>
+        /// <returns>True if the element is found; otherwise, false.</returns>
         public bool Contains(T item) => this.FindNode(item) != null;
 
+        /// <summary>
+        /// Copies the list items to an array, starting from the specified index.
+        /// </summary>
+        /// <param name="array">The array to which the elements will be copied.</param>
+        /// <param name="arrayIndex">The number of the position in the array to start copying from.</param>
+        /// <exception cref="ArgumentNullException">It is thrown if the provided array is null.</exception>
+        /// <exception cref="ArgumentOutOfRangeException">It is thrown If a negative starting position is specified.</exception>
+        /// <exception cref="ArgumentException">It is thrown if there is not enough space in the array to copy.</exception>
         public void CopyTo(T[] array, int arrayIndex)
         {
             if (array == null)
@@ -150,6 +170,11 @@ namespace SkipList
             }
         }
 
+        /// <summary>
+        /// Searching for the index of the first occurrence of the specified element.
+        /// </summary>
+        /// <param name="item">The desired element.</param>
+        /// <returns>The index of the first occurrence of the specified element.</returns>
         public int IndexOf(T item)
         {
             Node? desiredNode = this.FindNode(item);
@@ -182,6 +207,12 @@ namespace SkipList
             return -1;
         }
 
+        /// <summary>
+        /// Inserts an item into the list at the specified index.
+        /// </summary>
+        /// <param name="index">Insertion index.</param>
+        /// <param name="item">Element.</param>
+        /// <exception cref="ArgumentOutOfRangeException">It is thrown if a negative starting position is specified.</exception>
         public void Insert(int index, T item)
         {
             if (index < 0 || index > this.count)
@@ -246,6 +277,11 @@ namespace SkipList
             this.version++;
         }
 
+        /// <summary>
+        /// Deletes the first occurrence of the specified element.
+        /// </summary>
+        /// <param name="item">Item to delete.</param>
+        /// <returns>True if the element has been successfully deleted; otherwise, false.</returns>
         public bool Remove(T item)
         {
             Node? node = this.FindNode(item);
@@ -258,6 +294,11 @@ namespace SkipList
             return true;
         }
 
+        /// <summary>
+        /// Deletes an element by the specified index.
+        /// </summary>
+        /// <param name="index">Index of the item to delete.</param>
+        /// <exception cref="ArgumentOutOfRangeException">It is thrown if a negative starting position is specified.</exception>
         public void RemoveAt(int index)
         {
             if (index < 0 || index >= this.count)
@@ -269,6 +310,11 @@ namespace SkipList
             this.RemoveNode(node);
         }
 
+        /// <summary>
+        /// Returns an enumerator that iterates through the list items.
+        /// </summary>
+        /// <returns>Enumerator of elements.</returns>
+        /// <exception cref="InvalidOperationException">It is thrown if the collection has been changed.</exception>
         public IEnumerator<T> GetEnumerator()
         {
             int version = this.version;
@@ -286,6 +332,10 @@ namespace SkipList
             }
         }
 
+        /// <summary>
+        /// Implementation of the IEnumerable interface.
+        /// </summary>
+        /// <returns>Returns an enumerator of the IEnumerator type.</returns>
         IEnumerator IEnumerable.GetEnumerator()
         {
             return this.GetEnumerator();
