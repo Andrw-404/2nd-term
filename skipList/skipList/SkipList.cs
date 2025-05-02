@@ -8,30 +8,16 @@ namespace SkipList
 
     public class SkipList<T> : IList<T>
     {
-        private class Node
-        {
-            public T Value { get; }
-
-            public Node[] Next { get; }
-
-            public int[] Width { get; }
-
-            public Node(T value, int levels)
-            {
-                this.Value = value;
-                this.Next = new Node[levels];
-                this.Width = new int[levels];
-            }
-        }
-
         private const int MaxLevel = 32;
         private const double Probability = 0.5;
+
+        private readonly Random random = new Random();
+        private readonly IComparer<T> comparer;
         private readonly Node head = new Node(default, MaxLevel);
+
         private int currentLevels = 1;
         private int count;
         private int version;
-        private readonly Random random = new Random();
-        private readonly IComparer<T> comparer;
 
         /// <summary>
         /// Initializes a new instance of the <see cref="SkipList{T}"/> class.
@@ -62,6 +48,10 @@ namespace SkipList
                 this.head.Width[i] = 1;
             }
         }
+
+        public int Count => this.count;
+
+        public bool IsReadOnly => false;
 
         public T this[int index]
         {
@@ -99,10 +89,6 @@ namespace SkipList
 
             set => throw new NotImplementedException();
         }
-
-        public int Count => this.count;
-
-        public bool IsReadOnly => false;
 
         public void Add(T item) => this.Insert(this.count, item);
 
@@ -242,28 +228,6 @@ namespace SkipList
             this.version++;
         }
 
-        public IEnumerator<T> GetEnumerator()
-        {
-            int version = this.version;
-            Node current = this.head.Next[0];
-
-            while (current != null)
-            {
-                if (version != this.version)
-                {
-                    throw new InvalidOperationException();
-                }
-
-                yield return current.Value;
-                current = current.Next[0];
-            }
-        }
-
-        IEnumerator IEnumerable.GetEnumerator()
-        {
-            return this.GetEnumerator();
-        }
-
         public bool Remove(T item)
         {
             Node? node = this.FindNode(item);
@@ -285,6 +249,28 @@ namespace SkipList
 
             Node node = this.GetNodeAtIndex(index);
             this.RemoveNode(node);
+        }
+
+        public IEnumerator<T> GetEnumerator()
+        {
+            int version = this.version;
+            Node current = this.head.Next[0];
+
+            while (current != null)
+            {
+                if (version != this.version)
+                {
+                    throw new InvalidOperationException();
+                }
+
+                yield return current.Value;
+                current = current.Next[0];
+            }
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return this.GetEnumerator();
         }
 
         private Node? FindNode(T item)
@@ -369,6 +355,22 @@ namespace SkipList
             }
 
             return level;
+        }
+
+        private class Node
+        {
+            public Node(T value, int levels)
+            {
+                this.Value = value;
+                this.Next = new Node[levels];
+                this.Width = new int[levels];
+            }
+
+            public T Value { get; }
+
+            public Node[] Next { get; }
+
+            public int[] Width { get; }
         }
     }
 }
