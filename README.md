@@ -20,3 +20,5 @@
 ### [Задание 7: Map, Filter и Fold](https://github.com/Andrw-404/2nd-term/tree/MapFilterFold/FunctionalUtils)
 
 ### [Задание 8: Калькулятор](https://github.com/Andrw-404/2nd-term/tree/calculator/CalculatorOnForms2)
+
+### [Задание 9: Список с пропусками](https://github.com/Andrw-404/2nd-term/tree/skipList/skipList)
