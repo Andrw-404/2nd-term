@@ -16,7 +16,7 @@ namespace SkipList
         private const double Probability = 0.5;
 
         private readonly Random random = new Random();
-        private readonly IComparer<T> comparer;
+        private readonly IComparer<T> valueComparer;
         private readonly Node head = new Node(default, MaxLevel);
 
         private int currentLevels = 1;
@@ -27,12 +27,8 @@ namespace SkipList
         /// Initializes a new instance of the <see cref="SkipList{T}"/> class.
         /// </summary>
         public SkipList()
+            : this(Comparer<T>.Default)
         {
-            this.comparer = Comparer<T>.Default;
-            for (int i = 0; i < MaxLevel; ++i)
-            {
-                this.head.Width[i] = 1;
-            }
         }
 
         /// <summary>
@@ -46,11 +42,7 @@ namespace SkipList
                 throw new ArgumentNullException(nameof(comparer));
             }
 
-            this.comparer = comparer;
-            for (int i = 0; i < MaxLevel; ++i)
-            {
-                this.head.Width[i] = 1;
-            }
+            this.valueComparer = comparer;
         }
 
         /// <summary>
@@ -69,7 +61,6 @@ namespace SkipList
         /// <param name="index">The element's index.</param>
         /// <returns>The element by index.</returns>
         /// <exception cref="ArgumentOutOfRangeException">It is thrown if the index is out of range.</exception>
-        /// <exception cref="InvalidDataException">It is thrown when the list structure is violated.</exception>
         /// <exception cref="NotImplementedException">It is thrown when trying to set a value.</exception>
         public T this[int index]
         {
@@ -80,31 +71,8 @@ namespace SkipList
                     throw new ArgumentOutOfRangeException();
                 }
 
-                Node current = this.head;
-                int currentIndex = -1;
-
-                for (int i = this.currentLevels - 1; i >= 0; --i)
-                {
-                    while (current.Next[i] != null && currentIndex + current.Width[i] <= index)
-                    {
-                        currentIndex += current.Width[i];
-                        current = current.Next[i];
-                    }
-                }
-
-                for (int i = 0; i < index - currentIndex; ++i)
-                {
-                    if (current.Next[0] == null)
-                    {
-                        throw new InvalidDataException();
-                    }
-
-                    current = current.Next[0];
-                }
-
-                return current.Value;
+                return this.GetNodeAtIndex(index).Value;
             }
-
             set => throw new NotImplementedException();
         }
 
@@ -119,10 +87,10 @@ namespace SkipList
         /// </summary>
         public void Clear()
         {
-            for (int i = 0; i < this.currentLevels; ++i)
+            for (int i = 0; i < MaxLevel; ++i)
             {
                 this.head.Next[i] = null;
-                this.head.Width[i] = 1;
+                this.head.Width[i] = 0;
             }
 
             this.count = 0;
@@ -135,7 +103,7 @@ namespace SkipList
         /// </summary>
         /// <param name="item">The search element.</param>
         /// <returns>True if the element is found; otherwise, false.</returns>
-        public bool Contains(T item) => this.FindNode(item) != null;
+        public bool Contains(T item) => this.FindNodeByValue(item) != null;
 
         /// <summary>
         /// Copies the list items to an array, starting from the specified index.
@@ -152,7 +120,7 @@ namespace SkipList
                 throw new ArgumentNullException();
             }
 
-            if (arrayIndex < 0 || arrayIndex >= array.Length)
+            if (arrayIndex < 0)
             {
                 throw new ArgumentOutOfRangeException();
             }
@@ -163,10 +131,12 @@ namespace SkipList
             }
 
             Node current = this.head.Next[0];
+            int i = arrayIndex;
             while (current != null)
             {
-                array[arrayIndex++] = current.Value;
+                array[i] = current.Value;
                 current = current.Next[0];
+                i++;
             }
         }
 
@@ -177,31 +147,40 @@ namespace SkipList
         /// <returns>The index of the first occurrence of the specified element.</returns>
         public int IndexOf(T item)
         {
-            Node? desiredNode = this.FindNode(item);
-            if (desiredNode == null)
-            {
-                return -1;
-            }
-
-            int index = -1;
             Node current = this.head;
+            int index = -1;
 
             for (int i = this.currentLevels - 1; i >= 0; --i)
             {
-                while (current.Next[i] != null && this.comparer.Compare(current.Next[i].Value, item) < 0)
+                while (current.Next[i] != null && this.valueComparer.Compare(current.Next[i].Value, item) < 0)
                 {
                     index += current.Width[i];
                     current = current.Next[i];
                 }
+            }
 
-                if (current.Next[i] != null && this.comparer.Compare(current.Next[i].Value, item) == 0)
+            current = current.Next[0];
+
+            if (current != null && this.valueComparer.Compare(current.Value, item) == 0)
+            {
+                Node tmp = this.head;
+                int expectedIndex = -1;
+                for (int i = this.currentLevels - 1; i >= 0; --i)
                 {
-                    if (i == 0 && current.Next[0] == desiredNode)
+                    while (tmp.Next[i] != null && tmp.Next[i] != current && this.valueComparer.Compare(tmp.Next[i].Value, item) < 0)
                     {
-                        index += current.Width[0];
-                        return index - current.Width[0];
+                        expectedIndex += tmp.Width[i];
+                        tmp = tmp.Next[i];
+                    }
+
+                    if (tmp.Next[i] == current)
+                    {
+                        expectedIndex += tmp.Width[i];
+                        return expectedIndex;
                     }
                 }
+
+                return -1;
             }
 
             return -1;
@@ -222,36 +201,27 @@ namespace SkipList
 
             int newLevel = this.GetRandomLevel();
             Node newNode = new Node(item, newLevel);
-            Node[] update = new Node[newLevel];
-            int[] steps = new int[newLevel];
-            Node current = this.head;
-            int pos = -1;
-
-            for (int i = this.currentLevels - 1; i >= 0; --i)
-            {
-                while (current.Next[i] != null && this.comparer.Compare(current.Next[i].Value, item) < 0)
-                {
-                    pos += current.Width[i];
-                    current = current.Next[i];
-                }
-
-                if (i < newLevel)
-                {
-                    update[i] = current;
-                    steps[i] = pos + 1;
-                }
-            }
 
             if (newLevel > this.currentLevels)
             {
-                for (int i = this.currentLevels; i < newLevel; ++i)
+                this.currentLevels = newLevel;
+            }
+
+            Node[] update = new Node[this.currentLevels];
+            int[] indexAtLevel = new int[this.currentLevels];
+            Node current = this.head;
+            int currentIndex = -1;
+
+            for (int i = this.currentLevels - 1; i >= 0; --i)
+            {
+                while (current.Next[i] != null && (currentIndex + current.Width[i]) < index)
                 {
-                    this.head.Width[i] = this.count + 1;
-                    update[i] = this.head;
-                    steps[i] = 0;
+                    currentIndex += current.Width[i];
+                    current = current.Next[i];
                 }
 
-                this.currentLevels = newLevel;
+                update[i] = current;
+                indexAtLevel[i] = currentIndex;
             }
 
             for (int i = 0; i < newLevel; ++i)
@@ -259,18 +229,15 @@ namespace SkipList
                 newNode.Next[i] = update[i].Next[i];
                 update[i].Next[i] = newNode;
 
-                newNode.Width[i] = update[i].Width[i] - (index - (steps[i] == -1 ? 0 : steps[i]));
-                update[i].Width[i] = (index - (steps[i] == -1 ? 0 : steps[i])) + 1;
+                int distance = index - indexAtLevel[i];
 
-                if (newNode.Next[i] != null)
-                {
-                    newNode.Width[i]--;
-                }
+                newNode.Width[i] = update[i].Width[i] - distance + 1;
+                update[i].Width[i] = distance;
             }
 
             for (int i = newLevel; i < this.currentLevels; ++i)
             {
-                this.head.Width[i]++;
+                update[i].Width[i]++;
             }
 
             this.count++;
@@ -284,14 +251,15 @@ namespace SkipList
         /// <returns>True if the element has been successfully deleted; otherwise, false.</returns>
         public bool Remove(T item)
         {
-            Node? node = this.FindNode(item);
-            if (node == null)
+            int index = this.IndexOf(item);
+
+            if (index != -1)
             {
-                return false;
+                this.RemoveAt(index);
+                return true;
             }
 
-            this.RemoveNode(node);
-            return true;
+            return false;
         }
 
         /// <summary>
@@ -306,8 +274,51 @@ namespace SkipList
                 throw new ArgumentOutOfRangeException();
             }
 
-            Node node = this.GetNodeAtIndex(index);
-            this.RemoveNode(node);
+            Node[] update = new Node[this.currentLevels];
+            Node current = this.head;
+            int currentIndex = -1;
+
+            for (int i = this.currentLevels - 1; i >= 0; --i)
+            {
+                while (current.Next[i] != null && (currentIndex + current.Width[i]) < index)
+                {
+                    currentIndex += current.Width[i];
+                    current = current.Next[i];
+                }
+
+                update[i] = current;
+            }
+
+            Node nodeToRemove = update[0].Next[0];
+
+            if (nodeToRemove == null)
+            {
+                throw new InvalidDataException();
+            }
+
+            for (int i = 0; i < this.currentLevels; ++i)
+            {
+                if (update[i].Next[i] == nodeToRemove)
+                {
+                    update[i].Width[i] += nodeToRemove.Width[i] - 1;
+                    update[i].Next[i] = nodeToRemove.Next[i];
+                }
+                else
+                {
+                    if (update[i].Width[i] > 0)
+                    {
+                        update[i].Width[i]--;
+                    }
+                }
+            }
+
+            while (this.currentLevels > 1 && this.head.Next[this.currentLevels - 1] == null)
+            {
+                this.currentLevels--;
+            }
+
+            this.count--;
+            this.version++;
         }
 
         /// <summary>
@@ -317,12 +328,12 @@ namespace SkipList
         /// <exception cref="InvalidOperationException">It is thrown if the collection has been changed.</exception>
         public IEnumerator<T> GetEnumerator()
         {
-            int version = this.version;
+            int startVersion = this.version;
             Node current = this.head.Next[0];
 
             while (current != null)
             {
-                if (version != this.version)
+                if (startVersion != this.version)
                 {
                     throw new InvalidOperationException();
                 }
@@ -341,18 +352,18 @@ namespace SkipList
             return this.GetEnumerator();
         }
 
-        private Node? FindNode(T item)
+        private Node? FindNodeByValue(T value)
         {
             Node current = this.head;
             for (int i = this.currentLevels - 1; i >= 0; --i)
             {
-                while (current.Next[i] != null && this.comparer.Compare(current.Next[i].Value, item) < 0)
+                while (current.Next[i] != null && this.valueComparer.Compare(current.Next[i].Value, value) < 0)
                 {
                     current = current.Next[i];
                 }
             }
 
-            if (current.Next[0] != null && this.comparer.Compare(current.Next[0].Value, item) == 0)
+            if (current.Next[0] != null && this.valueComparer.Compare(current.Next[0].Value, value) == 0)
             {
                 return current.Next[0];
             }
@@ -362,6 +373,11 @@ namespace SkipList
 
         private Node GetNodeAtIndex(int index)
         {
+            if (index < 0 || index >= this.count)
+            {
+                throw new ArgumentOutOfRangeException();
+            }
+
             Node current = this.head;
             int currentIndex = -1;
 
@@ -375,43 +391,6 @@ namespace SkipList
             }
 
             return current;
-        }
-
-        private void RemoveNode(Node node)
-        {
-            Node[] update = new Node[this.currentLevels];
-            Node current = this.head;
-
-            for (int i = this.currentLevels - 1; i >= 0; --i)
-            {
-                while (current.Next[i] != null && this.comparer.Compare(current.Next[i].Value, node.Value) < 0)
-                {
-                    current = current.Next[i];
-                }
-
-                update[i] = current;
-            }
-
-            for (int i = 0; i < this.currentLevels; ++i)
-            {
-                if (update[i].Next[i] == node)
-                {
-                    update[i].Width[i] += node.Width[i] - 1;
-                    update[i].Next[i] = node.Next[i];
-                }
-                else
-                {
-                    update[i].Width[i]--;
-                }
-            }
-
-            while (this.currentLevels > 1 && this.head.Next[this.currentLevels - 1] == null)
-            {
-                this.currentLevels--;
-            }
-
-            this.count--;
-            this.version++;
         }
 
         private int GetRandomLevel()
