@@ -5,6 +5,7 @@
 namespace SkipList
 {
     using System.Collections;
+    using System.Runtime.ExceptionServices;
 
     /// <summary>
     /// An implementation of a skip list that supports the IListT interface.
@@ -77,10 +78,65 @@ namespace SkipList
         }
 
         /// <summary>
-        /// Adds an item to the end of the list.
+        /// Adds an item to the list.
         /// </summary>
         /// <param name="item">The element to add.</param>
-        public void Add(T item) => this.Insert(this.count, item);
+        public void Add(T item)
+        {
+            Node[] update = new Node[MaxLevel];
+            int[] index = new int[MaxLevel];
+            Node current = this.head;
+            int currentIndex = -1;
+
+            for (int i = this.currentLevels - 1; i >= 0; --i)
+            {
+                while (current.Next[i] != null && this.valueComparer.Compare(current.Next[i].Value, item) < 0)
+                {
+                    currentIndex += current.Width[i];
+                    current = current.Next[i];
+                }
+
+                update[i] = current;
+                index[i] = currentIndex;
+            }
+
+            int newLevel = this.GetRandomLevel();
+
+            if (newLevel > this.currentLevels)
+            {
+                for (int i = this.currentLevels; i < newLevel; ++i)
+                {
+                    index[i] = -1;
+                    update[i] = this.head;
+                }
+
+                this.currentLevels = newLevel;
+            }
+
+            Node newNode = new Node(item, newLevel);
+            int addIndex = index[0] + 1;
+
+            for (int i = 0; i < newLevel; ++i)
+            {
+                newNode.Next[i] = update[i].Next[i];
+                update[i].Next[i] = newNode;
+
+                int originalWidth = update[i].Width[i];
+                int widthBefore = addIndex - index[i];
+                int widthAfter = originalWidth - widthBefore;
+
+                newNode.Width[i] = widthAfter;
+                update[i].Width[i] = widthBefore;
+            }
+
+            for (int i = newLevel; i < this.currentLevels; ++i)
+            {
+                update[i].Width[i]++;
+            }
+
+            this.count++;
+            this.version++;
+        }
 
         /// <summary>
         /// Removes all items from the list.
@@ -163,24 +219,7 @@ namespace SkipList
 
             if (current != null && this.valueComparer.Compare(current.Value, item) == 0)
             {
-                Node tmp = this.head;
-                int expectedIndex = -1;
-                for (int i = this.currentLevels - 1; i >= 0; --i)
-                {
-                    while (tmp.Next[i] != null && tmp.Next[i] != current && this.valueComparer.Compare(tmp.Next[i].Value, item) < 0)
-                    {
-                        expectedIndex += tmp.Width[i];
-                        tmp = tmp.Next[i];
-                    }
-
-                    if (tmp.Next[i] == current)
-                    {
-                        expectedIndex += tmp.Width[i];
-                        return expectedIndex;
-                    }
-                }
-
-                return -1;
+                return index + 1;
             }
 
             return -1;
@@ -191,57 +230,10 @@ namespace SkipList
         /// </summary>
         /// <param name="index">Insertion index.</param>
         /// <param name="item">Element.</param>
-        /// <exception cref="ArgumentOutOfRangeException">It is thrown if a negative starting position is specified.</exception>
+        /// <exception cref="NotImplementedException">It is thrown when trying to call the method.</exception>
         public void Insert(int index, T item)
         {
-            if (index < 0 || index > this.count)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
-            int newLevel = this.GetRandomLevel();
-            Node newNode = new Node(item, newLevel);
-
-            if (newLevel > this.currentLevels)
-            {
-                this.currentLevels = newLevel;
-            }
-
-            Node[] update = new Node[this.currentLevels];
-            int[] indexAtLevel = new int[this.currentLevels];
-            Node current = this.head;
-            int currentIndex = -1;
-
-            for (int i = this.currentLevels - 1; i >= 0; --i)
-            {
-                while (current.Next[i] != null && (currentIndex + current.Width[i]) < index)
-                {
-                    currentIndex += current.Width[i];
-                    current = current.Next[i];
-                }
-
-                update[i] = current;
-                indexAtLevel[i] = currentIndex;
-            }
-
-            for (int i = 0; i < newLevel; ++i)
-            {
-                newNode.Next[i] = update[i].Next[i];
-                update[i].Next[i] = newNode;
-
-                int distance = index - indexAtLevel[i];
-
-                newNode.Width[i] = update[i].Width[i] - distance + 1;
-                update[i].Width[i] = distance;
-            }
-
-            for (int i = newLevel; i < this.currentLevels; ++i)
-            {
-                update[i].Width[i]++;
-            }
-
-            this.count++;
-            this.version++;
+            throw new NotImplementedException();
         }
 
         /// <summary>
