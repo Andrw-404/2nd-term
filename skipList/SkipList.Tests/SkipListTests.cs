@@ -41,9 +41,9 @@ namespace SkipList.Tests
         public void GetByIndex_TheCorrectList_ShouldReturnCorrectValue()
         {
             var testSkipList = new SkipList<int>();
-            testSkipList.Insert(0, 1);
-            testSkipList.Insert(1, 2);
-            testSkipList.Insert(2, 3);
+            testSkipList.Add(1);
+            testSkipList.Add(2);
+            testSkipList.Add(3);
 
             Assert.That(testSkipList[0], Is.EqualTo(1));
             Assert.That(testSkipList[1], Is.EqualTo(2));
@@ -188,9 +188,9 @@ namespace SkipList.Tests
         public void RemoveAt_CorrectIndex_ShouldReturnTrueAndListCountShouldBeEqualToTwo()
         {
             var testSkipList = new SkipList<int>();
-            testSkipList.Insert(0, 1);
-            testSkipList.Insert(1, 2);
-            testSkipList.Insert(2, 3);
+            testSkipList.Add(1);
+            testSkipList.Add(2);
+            testSkipList.Add(3);
 
             Assert.That(testSkipList[0], Is.EqualTo(1));
             Assert.That(testSkipList[1], Is.EqualTo(2));
@@ -210,9 +210,9 @@ namespace SkipList.Tests
         public void RemoveAt_InvalidIndex_ShouldThrowsArgumentOutOfRangeException()
         {
             var testSkipList = new SkipList<int>();
-            testSkipList.Insert(0, 1);
-            testSkipList.Insert(1, 2);
-            testSkipList.Insert(2, 3);
+            testSkipList.Add(1);
+            testSkipList.Add(2);
+            testSkipList.Add(3);
 
             Assert.That(testSkipList[0], Is.EqualTo(1));
             Assert.That(testSkipList[1], Is.EqualTo(2));
