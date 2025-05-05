@@ -365,11 +365,6 @@ namespace SkipList
 
         private Node GetNodeAtIndex(int index)
         {
-            if (index < 0 || index >= this.count)
-            {
-                throw new ArgumentOutOfRangeException();
-            }
-
             Node current = this.head;
             int currentIndex = -1;
 
