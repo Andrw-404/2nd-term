@@ -22,3 +22,7 @@
 ### [Задание 8: Калькулятор](https://github.com/Andrw-404/2nd-term/tree/calculator/CalculatorOnForms2)
 
 ### [Задание 9: Список с пропусками](https://github.com/Andrw-404/2nd-term/tree/skipList/skipList)
+
+### [Задание 10: MyLinq](https://github.com/Andrw-404/2nd-term/tree/MyLinq/MyLinqMethods)
+
+### [Задание 11: Реверси](https://github.com/Andrw-404/2nd-term/tree/reversi/reversi)
