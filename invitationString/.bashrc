@@ -119,11 +119,11 @@ fi
 
 function PromptInfo() {
     if git rev-parse --is-inside-work-tree &>/dev/null; then
-        local changedFiles=$(git status --porcelain | wc -l | awk '{print $1}')
+        local changedFiles=$(git status --porcelain | wc -l)
         echo -n " [Git: ${changedFiles} changed]"
     else
         local freeSpace=$(df -h . | awk 'NR==2 {print $4}')
-        local numOfFiles=$(ls -A | wc -l | awk '{print $1}')
+        local numOfFiles=$(ls -A | wc -l)
 
         echo -n " [Free: ${freeSpace}, Files: ${numOfFiles}]"
 fi
