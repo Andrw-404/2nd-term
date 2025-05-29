@@ -1,5 +1,5 @@
-﻿// <copyright file="MultiplyingNode.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="MultiplyingNode.cs" company="Kalinin Andrew">
+// Copyright (c) Kalinin Andrew. All rights reserved.
 // </copyright>
 
 namespace ParsingTree

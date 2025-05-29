@@ -1,5 +1,5 @@
-﻿// <copyright file="ParserTests.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="ParserTests.cs" company="Kalinin Andrew">
+// Copyright (c) Kalinin Andrew. All rights reserved.
 // </copyright>
 
 #pragma warning disable SA1600
