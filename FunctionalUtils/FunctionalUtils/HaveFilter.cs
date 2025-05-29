@@ -1,33 +1,32 @@
-﻿// <copyright file="HaveFilter.cs" company="PlaceholderCompany">
-// Copyright (c) PlaceholderCompany. All rights reserved.
+﻿// <copyright file="HaveFilter.cs" company="Kalinin Andrew">
+// Copyright (c) Kalinin Andrew. All rights reserved.
 // </copyright>
 
-namespace FunctionalUtils
+namespace FunctionalUtils;
+
+/// <summary>
+/// A class for implementing the Filter function.
+/// </summary>
+public static class HaveFilter
 {
     /// <summary>
-    /// A class for implementing the Filter function.
+    /// Filters the incoming list using the incoming function.
     /// </summary>
-    public class HaveFilter
+    /// <typeparam name="T">Type of list items.</typeparam>
+    /// <param name="inputList">Incoming list.</param>
+    /// <param name="function">A function that is applied to each element of the list and indicates the elements we need.</param>
+    /// <returns>A new list containing the elements satisfying the function.</returns>
+    public static List<T> Filter<T>(List<T> inputList, Func<T, bool> function)
     {
-        /// <summary>
-        /// Filters the incoming list using the incoming function.
-        /// </summary>
-        /// <typeparam name="T">Type of list items.</typeparam>
-        /// <param name="inputList">Incoming list.</param>
-        /// <param name="function">A function that is applied to each element of the list and indicates the elements we need.</param>
-        /// <returns>A new list containing the elements satisfying the function.</returns>
-        public static List<T> Filter<T>(List<T> inputList, Func<T, bool> function)
+        var newList = new List<T>();
+        foreach (var i in inputList)
         {
-            var newList = new List<T>();
-            foreach (var i in inputList)
+            if (function(i))
             {
-                if (function(i))
-                {
-                    newList.Add(i);
-                }
+                newList.Add(i);
             }
-
-            return newList;
         }
+
+        return newList;
     }
 }
