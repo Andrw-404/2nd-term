@@ -1,6 +1,10 @@
-﻿namespace Routers.Tests
+﻿// <copyright file="OutputTests.cs" company="Kalinin Andrew">
+// Copyright (c) Kalinin Andrew. All rights reserved.
+// </copyright>
+
+namespace Routers.Tests
 {
-    class OutputTests
+    public class OutputTests
     {
         [Test]
         public void TransformationMst_CorrectMST_ShouldReturnCorrectForm()

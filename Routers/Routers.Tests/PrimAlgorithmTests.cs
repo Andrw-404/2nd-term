@@ -1,15 +1,19 @@
-﻿namespace Routers.Tests
+﻿// <copyright file="PrimAlgorithmTests.cs" company="Kalinin Andrew">
+// Copyright (c) Kalinin Andrew. All rights reserved.
+// </copyright>
+
+namespace Routers.Tests
 {
-    class PrimAlgorithmTests
+    public class PrimAlgorithmTests
     {
-        private string PrimtestFilePath = "FileForPrimTests.txt";
+        private string primtestFilePath = "FileForPrimTests.txt";
 
         [TearDown]
         public void Clean()
         {
-            if (File.Exists(PrimtestFilePath))
+            if (File.Exists(this.primtestFilePath))
             {
-                File.Delete(PrimtestFilePath);
+                File.Delete(this.primtestFilePath);
             }
         }
 

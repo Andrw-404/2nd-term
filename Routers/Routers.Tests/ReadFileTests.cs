@@ -1,15 +1,19 @@
-﻿namespace Routers.Tests
+﻿// <copyright file="ReadFileTests.cs" company="Kalinin Andrew">
+// Copyright (c) Kalinin Andrew. All rights reserved.
+// </copyright>
+
+namespace Routers.Tests
 {
-    public class ReadFromFileTests
+    public class ReadFileTests
     {
         private string testFilePath = "FileForReadTest.txt";
 
         [TearDown]
         public void Clean()
         {
-            if (File.Exists(testFilePath))
+            if (File.Exists(this.testFilePath))
             {
-                File.Delete(testFilePath);
+                File.Delete(this.testFilePath);
             }
         }
 
@@ -17,9 +21,9 @@
         public void ReadFromFile_ValidInput_ShouldReturnCorrectGraph()
         {
             string inputForFile = "1: 2 (10), 3 (5)\n2: 3 (1)";
-            File.WriteAllText(testFilePath, inputForFile);
+            File.WriteAllText(this.testFilePath, inputForFile);
 
-            var graph = ReadFile.ReadFromFile(testFilePath);
+            var graph = ReadFile.ReadFromFile(this.testFilePath);
             var edges = graph.GetAllEdges.ToList();
 
             Assert.That(graph.GetAllEdges.Count, Is.EqualTo(3));
@@ -34,9 +38,9 @@
         public void ReadFromFile_InvalidInput_ShouldIgnoreErrors()
         {
             string inputForFile = "dasda\n2: av (c_), 3 (1)";
-            File.WriteAllText(testFilePath, inputForFile);
+            File.WriteAllText(this.testFilePath, inputForFile);
 
-            var graph = ReadFile.ReadFromFile(testFilePath);
+            var graph = ReadFile.ReadFromFile(this.testFilePath);
             var edges = graph.GetAllEdges.ToList();
 
             Assert.That(graph.GetAllEdges.Count, Is.EqualTo(1));
@@ -49,9 +53,9 @@
         public void ReadFromFile_EmptyInput_ShouldReturnEmptyGraph()
         {
             string inputForFile = " ";
-            File.WriteAllText(testFilePath, inputForFile);
+            File.WriteAllText(this.testFilePath, inputForFile);
 
-            var graph = ReadFile.ReadFromFile(testFilePath);
+            var graph = ReadFile.ReadFromFile(this.testFilePath);
             var edges = graph.GetAllEdges.ToList();
 
             Assert.That(graph.GetAllEdges.Count, Is.EqualTo(0));
