@@ -5,7 +5,6 @@
 /// <summary>
 /// the trie class with the required methods.
 /// </summary>
-
 namespace Trie
 {
     /// <summary>
