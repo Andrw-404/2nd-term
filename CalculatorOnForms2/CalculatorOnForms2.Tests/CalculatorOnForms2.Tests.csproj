@@ -21,6 +21,14 @@
 	</ItemGroup>
 
 	<ItemGroup>
+		<None Remove="stylecop.json" />
+	</ItemGroup>
+
+	<ItemGroup>
+		<AdditionalFiles Include="stylecop.json" />
+	</ItemGroup>
+
+	<ItemGroup>
 	  <ProjectReference Include="..\CalculatorOnForms2\CalculatorOnForms2.csproj" />
 	</ItemGroup>
 

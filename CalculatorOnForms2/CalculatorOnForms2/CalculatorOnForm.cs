@@ -2,62 +2,61 @@
 // Copyright (c) PlaceholderCompany. All rights reserved.
 // </copyright>
 
-namespace CalculatorOnForms2
+namespace CalculatorOnForms2;
+
+/// <summary>
+/// The basic form of the calculator that implements the user interface.
+/// </summary>
+public partial class CalculatorOnForm : Form
 {
+    private Calculator calculator = new Calculator();
+
     /// <summary>
-    /// The basic form of the calculator that implements the user interface.
+    /// Initializes a new instance of the <see cref="CalculatorOnForm"/> class.
     /// </summary>
-    public partial class CalculatorOnForm : Form
+    public CalculatorOnForm()
     {
-        private Calculator calculator = new Calculator();
+        this.InitializeComponent();
+        this.UpdateDisplay();
+    }
 
-        /// <summary>
-        /// Initializes a new instance of the <see cref="CalculatorOnForm"/> class.
-        /// </summary>
-        public CalculatorOnForm()
+    private void UpdateDisplay()
+    {
+        this.textBox1.Text = this.calculator.CurrentDisplay;
+    }
+
+    private void ButtonNumber_Click(object sender, EventArgs e)
+    {
+        Button btn = (Button)sender;
+        this.calculator.AppendNumber(btn.Text);
+        this.UpdateDisplay();
+    }
+
+    private void ButtonOperator_Click(object sender, EventArgs e)
+    {
+        Button btn = (Button)sender;
+        this.calculator.SetOperator(btn.Text[0]);
+        this.UpdateDisplay();
+    }
+
+    private void ButtonEquals_Click(object sender, EventArgs e)
+    {
+        try
         {
-            this.InitializeComponent();
+            this.calculator.Calculate();
             this.UpdateDisplay();
         }
-
-        private void UpdateDisplay()
+        catch (DivideByZeroException)
         {
-            this.textBox1.Text = this.calculator.CurrentDisplay;
-        }
-
-        private void ButtonNumber_Click(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            this.calculator.AppendNumber(btn.Text);
-            this.UpdateDisplay();
-        }
-
-        private void ButtonOperator_Click(object sender, EventArgs e)
-        {
-            Button btn = (Button)sender;
-            this.calculator.SetOperator(btn.Text[0]);
-            this.UpdateDisplay();
-        }
-
-        private void ButtonEquals_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                this.calculator.Calculate();
-                this.UpdateDisplay();
-            }
-            catch (DivideByZeroException)
-            {
-                this.textBox1.Text = "Деление на ноль невозможно";
-                this.calculator.Clear();
-                this.calculator.AppendNumber("0");
-            }
-        }
-
-        private void ButtonClear_Click(object sender, EventArgs e)
-        {
+            this.textBox1.Text = "Деление на ноль невозможно";
             this.calculator.Clear();
-            this.UpdateDisplay();
+            this.calculator.AppendNumber("0");
         }
+    }
+
+    private void ButtonClear_Click(object sender, EventArgs e)
+    {
+        this.calculator.Clear();
+        this.UpdateDisplay();
     }
 }
