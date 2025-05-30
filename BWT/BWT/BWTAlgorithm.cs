@@ -2,7 +2,7 @@
 
 public static class BWTAlgorithm
 {
-    public static (string, int) FrontBWT(string input)
+    public static (string TransformedString, int EndPosition) FrontBWT(string input)
     {
         if (string.IsNullOrEmpty(input))
         {
