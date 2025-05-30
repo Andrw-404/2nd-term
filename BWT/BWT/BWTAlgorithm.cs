@@ -1,6 +1,6 @@
 ﻿namespace BWT;
 
-public class BWTAlgorithm
+public static class BWTAlgorithm
 {
     public static (string, int) FrontBWT(string input)
     {
@@ -10,7 +10,7 @@ public class BWTAlgorithm
         }
 
         int lengthOfString = input.Length;
-        int[] indices = new int[lengthOfString];
+        var indices = new int[lengthOfString];
 
         for (int i = 0; i < lengthOfString; ++i)
         {
@@ -32,7 +32,7 @@ public class BWTAlgorithm
             return 0;
         });
 
-        char[] bwtChars = new char[lengthOfString];
+        var bwtChars = new char[lengthOfString];
         int bwtIndex = -1;
 
         for (int i = 0; i < lengthOfString; ++i)
@@ -60,8 +60,8 @@ public class BWTAlgorithm
 
         int lengthOfBWTString = bwtString.Length;
 
-        char[] result = new char[lengthOfBWTString];
-        int[] next = new int[lengthOfBWTString];
+        var result = new char[lengthOfBWTString];
+        var next = new int[lengthOfBWTString];
 
         Dictionary<char, int> counts = new Dictionary<char, int>();
         foreach (char symbol in bwtString)
