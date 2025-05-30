@@ -15,10 +15,7 @@ public class NumberNode : Node
     /// Initializes a new instance of the <see cref="NumberNode"/> class.
     /// </summary>
     /// <param name="value">The integer that represents the node.</param>
-    public NumberNode(int value)
-    {
-        this.value = value;
-    }
+    public NumberNode(int value) => this.value = value;
 
     /// <summary>
     /// Returns the number that represents the node.

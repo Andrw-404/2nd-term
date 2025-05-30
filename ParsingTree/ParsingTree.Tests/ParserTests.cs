@@ -12,10 +12,7 @@ public class ParserTests
     private Parser parser;
 
     [SetUp]
-    public void SetUp()
-    {
-        this.parser = new Parser();
-    }
+    public void SetUp() => this.parser = new Parser();
 
     [Test]
     public void Parse_SimpleExpression_ShouldReturnCorrectValue()

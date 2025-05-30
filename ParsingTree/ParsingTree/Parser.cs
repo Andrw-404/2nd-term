@@ -79,10 +79,7 @@ public class Parser
         return symbols;
     }
 
-    private bool IsOperator(char symbol)
-    {
-        return symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
-    }
+    private bool IsOperator(char symbol) => symbol == '+' || symbol == '-' || symbol == '*' || symbol == '/';
 
     private Node ParseOperand()
     {
