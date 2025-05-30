@@ -42,10 +42,7 @@ public static class MyLinqMethods
             throw new ArgumentOutOfRangeException();
         }
 
-        if (seq == null)
-        {
-            throw new ArgumentNullException();
-        }
+        ArgumentNullException.ThrowIfNull(seq);
 
         int count = 0;
 
@@ -109,12 +106,7 @@ public static class MyLinqMethods
             return true;
         }
 
-        if (number % 2 == 0)
-        {
-            return false;
-        }
-
-        for (int i = 3; i * i <= number; i += 2)
+        for (int i = 2; i * i <= number; i += 2)
         {
             if (number % i == 0)
             {

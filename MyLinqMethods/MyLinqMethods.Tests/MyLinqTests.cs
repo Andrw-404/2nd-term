@@ -9,10 +9,7 @@ public class MyLinqTests
     private List<int> source;
 
     [SetUp]
-    public void SetUp()
-    {
-        this.source = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
-    }
+    public void SetUp() => this.source = new List<int> { 1, 2, 3, 4, 5, 6, 7, 8, 9 };
 
     [Test]
     public void GetPrimes_FirstFewElements_ShouldReturnCorrectPrimeNumbers()
@@ -43,16 +40,12 @@ public class MyLinqTests
     }
 
     [Test]
-    public void Take_ZeroNumber_ShouldThrowException()
-    {
-        Assert.Throws<ArgumentOutOfRangeException>(() => this.source.Take(0).ToList());
-    }
+    public void Take_ZeroNumber_ShouldThrowException() 
+        => Assert.Throws<ArgumentOutOfRangeException>(() => this.source.Take(0).ToList());
 
     [Test]
-    public void Take_NegativeNumber_ShouldThrowException()
-    {
-        Assert.Throws<ArgumentOutOfRangeException>(() => this.source.Take(-3).ToList());
-    }
+    public void Take_NegativeNumber_ShouldThrowException() 
+        => Assert.Throws<ArgumentOutOfRangeException>(() => this.source.Take(-3).ToList());
 
     [Test]
     public void Take_EmptySequence_ShouldReturnEmptySequence()
@@ -71,16 +64,10 @@ public class MyLinqTests
     }
 
     [Test]
-    public void Skip_ZeroNumber_ShouldThrowException()
-    {
-        Assert.Throws<ArgumentOutOfRangeException>(() => this.source.Skip(0).ToList());
-    }
+    public void Skip_ZeroNumber_ShouldThrowException() => Assert.Throws<ArgumentOutOfRangeException>(() => this.source.Skip(0).ToList());
 
     [Test]
-    public void Skip_NegativeNumber_ShouldThrowException()
-    {
-        Assert.Throws<ArgumentOutOfRangeException>(() => this.source.Skip(-3).ToList());
-    }
+    public void Skip_NegativeNumber_ShouldThrowException() => Assert.Throws<ArgumentOutOfRangeException>(() => this.source.Skip(-3).ToList());
 
     [Test]
     public void Skip_EmptySequence_ShouldReturnEmptySequence()
