@@ -257,4 +257,60 @@ public class SkipListTests
         Assert.That(tmpList[1], Is.EqualTo(2));
         Assert.That(tmpList[2], Is.EqualTo(3));
     }
+
+    [Test]
+    public void AddAndCount_LargeNumberOfRandomElements_ShouldHaveCorrectCountAndOrder()
+    {
+        var testSkipList = new SkipList<int>();
+        var referenceSortedSet = new List<int>();
+        var random = new Random(12345);
+
+        for (int i = 0; i < 10000; i++)
+        {
+            int value = random.Next(-10000, 10000);
+            testSkipList.Add(value);
+            referenceSortedSet.Add(value);
+        }
+
+        referenceSortedSet.Sort();
+        Assert.That(testSkipList.Count, Is.EqualTo(referenceSortedSet.Count));
+
+        int index = 0;
+        foreach (int item in testSkipList)
+        {
+            Assert.That(item, Is.EqualTo(referenceSortedSet[index]));
+            index++;
+        }
+    }
+
+    [Test]
+    public void Contains_LargeNumberOfRandomElements_ShouldReturnCorrectResults()
+    {
+        var testSkipList = new SkipList<int>();
+        var referenceSortedSet = new List<int>();
+        var random = new Random(12345);
+
+        int valueToFind1 = 0;
+        int valueToFind2 = 0;
+
+        for (int i = 0; i < 10000; i++)
+        {
+            int value = random.Next(-10000, 10000);
+            testSkipList.Add(value);
+            referenceSortedSet.Add(value);
+
+            if (i == 10000 / 4)
+            {
+                valueToFind1 = value;
+            }
+
+            if (i == 10000 / 2)
+            {
+                valueToFind2 = value;
+            }
+        }
+
+        Assert.That(testSkipList.Contains(valueToFind1), Is.True);
+        Assert.That(testSkipList.Contains(valueToFind2), Is.True);
+    }
 }
