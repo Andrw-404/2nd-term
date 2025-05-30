@@ -20,10 +20,7 @@ public partial class CalculatorOnForm : Form
         this.UpdateDisplay();
     }
 
-    private void UpdateDisplay()
-    {
-        this.textBox1.Text = this.calculator.CurrentDisplay;
-    }
+    private void UpdateDisplay() => this.textBox1.Text = this.calculator.CurrentDisplay;
 
     private void ButtonNumber_Click(object sender, EventArgs e)
     {
