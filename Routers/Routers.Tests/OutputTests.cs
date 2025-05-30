@@ -11,9 +11,9 @@ public class OutputTests
     {
         var graph = new List<Edge>()
         {
-        new Edge(1, 2, 10),
-        new Edge(2, 3, 1),
-        new Edge(1, 3, 5),
+            new Edge(1, 2, 10),
+            new Edge(2, 3, 1),
+            new Edge(1, 3, 5),
         };
 
         string result = Output.TransformationMst(graph);

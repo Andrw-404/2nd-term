@@ -9,8 +9,8 @@ namespace Routers;
 /// </summary>
 public class Graph
 {
-    private readonly List<Edge> edges = new List<Edge>();
-    private readonly HashSet<int> vertexes = new HashSet<int>();
+    private readonly List<Edge> edges = new();
+    private readonly HashSet<int> vertexes = new();
 
     /// <summary>
     /// Gets all the edges.
